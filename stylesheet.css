@@ -1,0 +1,23 @@
+html{
+    margin: 0;
+    height: 100%;
+}
+body{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttons{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black;
+}
+
+.btn{
+    height: 100px;
+    width: 20%;
+    border-radius: 10px;
+    font-size: 112%;
+}

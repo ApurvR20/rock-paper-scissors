@@ -1,87 +1,47 @@
+
 const game = () =>{
 
-    const choices = ['rock','paper','scissors']
-    const roundLogic = (playerSelection,computerSelection) => {
-
-        const ps = playerSelection.toLowerCase()
-        const cs = computerSelection
-        let result = ""
-
-        console.log(`ps : ${ps} cs : ${cs}`);
+    const choices = ['rock','paper','scissors'];
+    let pWin = 0;
+    let cWin = 0;
     
-        if(choices.includes(ps))
-        {
-            //Draw condition
-            if(ps == cs)
-            {
-                result = ['Draw']
-            }
-            //Player Lose condition
-            else if(
-                ps == "rock" && cs == "paper" ||
-                ps == "paper" && cs == "scissors" ||
-                ps == "scissors" && cs == "rock")
-                {
-                    result = ["Lose", computerSelection, playerSelection]
-                }
-            //Player Win Con
-            else{
-                result = ["Win", playerSelection, computerSelection]
-            }
-        }
-        else
-        {
-            result = ['error']
-        }
-        return result
-    }
-    
-    const playRound = (round) =>{
+    const playRound = (playerSelection) =>{
         
-        const getComputerChoice = () => choices[Math.floor(Math.random()*3)]
-    
-        playerSelection = prompt(`Round ${round}. Pick One. (Rock, Paper, Scissors)`)
-    
-        res = roundLogic(playerSelection, getComputerChoice())
-    
-        if(res[0] == 'error')
-        {
-            alert('Incorrect Input. Retry')
-            return [false, res[0]]
-        }
+        const computerSelection = choices[Math.floor(Math.random()*3)]
+        console.log(playerSelection + " " + computerSelection);
+        //Draw con
+        if(playerSelection == computerSelection)
+        return 0;
+        //Lose con
+        else if( playerSelection == "rock" && computerSelection == "paper" ||
+            playerSelection == "paper" && computerSelection == "scissors" ||
+            playerSelection == "scissors" && computerSelection == "rock")
+            {
+                cWin++;
+            }
+        //Win Con
         else{
-            if (res[0] == 'Draw') alert(res)
-            else 
-            {
-                alert(`You ${res[0]}. ${res[1]} beats ${res[2]}.`)
-            }
-    
-            return [true, res[0]]
+            pWin++;
         }
-        
+
+        console.log(`pWin = ${pWin} cWin = ${cWin}`);
     }
-    
-    (() => {
-        alert("Rock-Paper-Scissors Go!! Pick one in each round to win in Best of five!!")
-    
-        roundNo = 1
-        win = 0
-        loss = 0
-        draw = 0
-        while(roundNo < 6)
-        {
-            let roundResults = playRound(roundNo);
-            if(roundResults[0])
-            {
-                roundNo++
-                if(roundResults[1] == 'Draw') draw++;
-                else if(roundResults[1] == 'Win') win++;
-                else loss++;
-            }
+
+    const buttons = document.querySelectorAll(".btn");
+    buttons.forEach(button => {
+        const onClick = () => {
+            playRound(button.id);
         }
-        
-        alert(`Your final score \n Win : ${win}\n Loss : ${loss}\n Draw : ${draw}`)
-    })()
+        button.addEventListener('click',onClick);
+
+    })
+
+    /*
+    -button click
+    - event passes to logic, matches against computer choice, give result
+    - keep score of each round till first to 5
+    - declare winner */
+    
 
 }
 
