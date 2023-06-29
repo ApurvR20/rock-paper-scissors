@@ -11,6 +11,7 @@
     scoreboard.classList.add('scoreboard');
 
     const result = document.createElement('p');
+    result.textContent = ' ';
     
     body.appendChild(scoreboard);
     
